@@ -27,8 +27,8 @@ const CurrentWeather = () => {
         <RowText
           messageOne={"It's Sunny"}
           messageTwo={"It's perfect T-shirt weather"}
-          messageOneStyles={[description, c.textBlue700, u.textCenter]}
-          messageTwoStyles={[message, c.textBlue700, u.textCenter]}
+          messageOneStyles={[description, c.textGray300, u.textCenter]}
+          messageTwoStyles={[message, c.textGray300, u.textCenter]}
           containerStyles={[u.p4]}
         />
       </ImageBackground>
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   },
   bgImage: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
   },
   container: {
     flex: 1,
@@ -87,9 +86,11 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 25,
+    fontWeight: "bold",
   },
   message: {
     fontSize: 20,
+    fontWeight: "bold",
   },
 });
 
