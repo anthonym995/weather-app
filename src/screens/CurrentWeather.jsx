@@ -5,6 +5,7 @@ import u from "./../utils/styles";
 import c from "./../utils/c";
 import bc from "./../utils/bc";
 import RowText from "../components/RowText";
+import { weatherType } from "../utils/weatherType";
 
 const CurrentWeather = () => {
   const { wrapper, container, bgImage, title, temp, feels, highLowWrapper, highLow, description, message } = styles;

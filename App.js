@@ -1,46 +1,53 @@
-import React from "react";
-import CurrentWeather from "./src/screens/CurrentWeather";
-import UpcomingWeather from "./src/screens/UpcomingWeather";
-import City from "./src/screens/City";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Feather } from "@expo/vector-icons";
-
-const Tab = createBottomTabNavigator();
+import Tabs from "./src/components/Tabs";
+import Counter from "./src/demonstration/Couter";
+import * as Location from "expo-location";
 
 const App = () => {
+  const [loading, setLoading] = useState(false);
+  const [location, setLocation] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setError("permission to access location was denied");
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+
+  if (location) {
+    console.log(location);
+  }
+
+  const { container } = styles;
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size={"large"} color={"blue"} />
+      </View>
+    );
+  }
+
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: "tint",
-          tabBarInactiveTintColor: "gray",
-        }}
-      >
-        <Tab.Screen
-          name={"current"}
-          component={CurrentWeather}
-          options={{
-            tabBarIcon: ({ focused }) => <Feather name={"droplet"} size={25} color={focused ? "tomato" : "black"} />,
-          }}
-        />
-        <Tab.Screen
-          name={"upcoming"}
-          component={UpcomingWeather}
-          options={{
-            tabBarIcon: ({ focused }) => <Feather name={"clock"} size={25} color={focused ? "tomato" : "black"} />,
-          }}
-        />
-        <Tab.Screen
-          name={"city"}
-          component={City}
-          options={{
-            tabBarIcon: ({ focused }) => <Feather name={"home"} size={25} color={focused ? "tomato" : "black"} />,
-          }}
-        />
-      </Tab.Navigator>
+      <Tabs />
+      {/* <Counter /> */}
     </NavigationContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+});
 
 export default App;
