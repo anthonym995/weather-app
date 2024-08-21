@@ -1,5 +1,12 @@
 import React from "react";
-import { SafeAreaView, Text, FlatList, StyleSheet, StatusBar, ImageBackground } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  FlatList,
+  StyleSheet,
+  StatusBar,
+  ImageBackground,
+} from "react-native";
 import ListItems from "../components/ListItems";
 
 const DATA = [
@@ -91,9 +98,16 @@ const UpcomingWeather = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground style={styles.image} source={require("../../assets/up-bg.jpg")}>
+      <ImageBackground
+        style={styles.image}
+        source={require("../../assets/up-bg.jpg")}
+      >
         <Text style={styles.title}>Upcoming Weather</Text>
-        <FlatList data={DATA} renderItem={renderItem} keyExtractor={(item) => item.dt_txt} />
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.dt_txt}
+        />
       </ImageBackground>
     </SafeAreaView>
   );
@@ -109,6 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "green",
     marginBottom: 20,
+    marginTop: StatusBar.currentHeight || 0,
   },
   image: {
     flex: 1,

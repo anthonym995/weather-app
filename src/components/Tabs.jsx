@@ -8,13 +8,13 @@ import { Feather } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = () => {
+const Tabs = ({weather}) => {
   return (
     <>
       <StatusBar
-        barStyle="light-content" // You can set it to 'dark-content' if you prefer
+        barStyle="dark-content" // You can set it to 'dark-content' if you prefer
         translucent={false} // Allows content to be drawn behind the status bar
-        backgroundColor="lightblue" // Makes the status bar background transparent
+        backgroundColor="transparent" // Makes the status bar background transparent
       />
       <Tab.Navigator
         screenOptions={{
@@ -36,23 +36,43 @@ const Tabs = () => {
       >
         <Tab.Screen
           name={"current"}
-          component={CurrentWeather}
           options={{
-            tabBarIcon: ({ focused }) => <Feather name={"droplet"} size={25} color={focused ? "tomato" : "black"} />,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name={"droplet"}
+                size={25}
+                color={focused ? "tomato" : "black"}
+              />
+            ),
           }}
-        />
+        >
+          {() => <CurrentWeather weatherData={weather.list[0]} />}
+        </Tab.Screen>
+
         <Tab.Screen
           name={"upcoming"}
           component={UpcomingWeather}
           options={{
-            tabBarIcon: ({ focused }) => <Feather name={"clock"} size={25} color={focused ? "tomato" : "black"} />,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name={"clock"}
+                size={25}
+                color={focused ? "tomato" : "black"}
+              />
+            ),
           }}
         />
         <Tab.Screen
           name={"city"}
           component={City}
           options={{
-            tabBarIcon: ({ focused }) => <Feather name={"home"} size={25} color={focused ? "tomato" : "black"} />,
+            tabBarIcon: ({ focused }) => (
+              <Feather
+                name={"home"}
+                size={25}
+                color={focused ? "tomato" : "black"}
+              />
+            ),
           }}
         />
       </Tab.Navigator>

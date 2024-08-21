@@ -1,5 +1,12 @@
 import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, StatusBar, ImageBackground } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  ImageBackground,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import IconText from "../components/IconText";
 
@@ -18,13 +25,22 @@ const City = () => {
   } = styles;
   return (
     <SafeAreaView style={container}>
-      <ImageBackground style={image} source={require("../../assets/city-bg.jpg")}>
+      <ImageBackground
+        style={image}
+        source={require("../../assets/city-bg.jpg")}
+      >
         <View>
           <Text style={[cityText, cityName]}>London</Text>
           <Text style={[cityText, countryName]}>UK</Text>
         </View>
         <View style={[popWrapper, rowLayout]}>
-          <IconText iconName={"user"} iconSize={50} iconColor={"red"} bodyText={"8000"} bodyTextStyles={popText} />
+          <IconText
+            iconName={"user"}
+            iconSize={50}
+            iconColor={"red"}
+            bodyText={"8000"}
+            bodyTextStyles={popText}
+          />
         </View>
         <View style={[riseSetWrapper, rowLayout]}>
           <IconText
@@ -63,12 +79,15 @@ const styles = StyleSheet.create({
   cityName: {
     fontSize: 40,
     marginBottom: 20,
+    marginTop: StatusBar.currentHeight || 0,
+    color: "red",
   },
   countryName: {
     fontSize: 30,
     backgroundColor: "lightgray",
     paddingHorizontal: 20,
     borderRadius: 100,
+    color: "blue",
   },
   popWrapper: {
     marginTop: 30,
