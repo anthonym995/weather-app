@@ -8,12 +8,12 @@ import { Feather } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
-const Tabs = ({weather}) => {
+const Tabs = ({ weather }) => {
   return (
     <>
       <StatusBar
-        barStyle="dark-content" // You can set it to 'dark-content' if you prefer
-        translucent={false} // Allows content to be drawn behind the status bar
+        barStyle="light-content" // You can set it to 'dark-content' if you prefer
+        translucent={true} // Allows content to be drawn behind the status bar
         backgroundColor="transparent" // Makes the status bar background transparent
       />
       <Tab.Navigator
@@ -51,7 +51,6 @@ const Tabs = ({weather}) => {
 
         <Tab.Screen
           name={"upcoming"}
-          component={UpcomingWeather}
           options={{
             tabBarIcon: ({ focused }) => (
               <Feather
@@ -61,10 +60,11 @@ const Tabs = ({weather}) => {
               />
             ),
           }}
-        />
+        >
+          {() => <UpcomingWeather weatherData={weather.list} />}
+        </Tab.Screen>
         <Tab.Screen
           name={"city"}
-          component={City}
           options={{
             tabBarIcon: ({ focused }) => (
               <Feather
@@ -74,7 +74,9 @@ const Tabs = ({weather}) => {
               />
             ),
           }}
-        />
+        >
+          {() => <City weatherData={weather.city} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </>
   );

@@ -40,7 +40,7 @@ const CurrentWeather = ({ weatherData }) => {
     <SafeAreaView
       style={[
         wrapper,
-        { backgroundColor: weatherType[weatherCondition].backgroundColor },
+        { backgroundColor: weatherType[weatherCondition]?.backgroundColor },
       ]}
     >
       <ImageBackground style={bgImage} source={require("../../assets/bg.jpg")}>
@@ -48,15 +48,15 @@ const CurrentWeather = ({ weatherData }) => {
           <Text style={title}>Current Weather</Text>
           <Feather
             style={u.textCenter}
-            name={weatherType[weatherCondition].icon}
+            name={weatherType[weatherCondition]?.icon}
             color="white"
             size={100}
           />
           <Text style={tempStyles}>{temp}</Text>
-          <Text style={feels}>{`Feels like ${feels_like}`}</Text>
+          <Text style={feels}>{`Feels like ${feels_like}°`}</Text>
           <RowText
-            messageOne={`High: ${temp_max}`}
-            messageTwo={`Low: ${temp_min}`}
+            messageOne={`High: ${temp_max}°`}
+            messageTwo={`Low: ${temp_min}°`}
             messageOneStyles={[highLow, c.textBlue700]}
             messageTwoStyles={[highLow, c.textBlue700]}
             containerStyles={[highLowWrapper, bc.blue300, u.shadow]}
@@ -64,7 +64,7 @@ const CurrentWeather = ({ weatherData }) => {
         </View>
         <RowText
           messageOne={weather[0].description}
-          messageTwo={weatherType[weatherCondition].message}
+          messageTwo={weatherType[weatherCondition]?.message}
           messageOneStyles={[description, c.textGray300, u.textCenter]}
           messageTwoStyles={[message, c.textGray300, u.textCenter]}
           containerStyles={[u.p4]}
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   description: {
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
   },
   message: {
